@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Virtual Department Tour</title>
+  <link rel="shortcut icon" href="images/favicon.png" type="image/x-icon">
+  <style>
+    /* Base Styles */
+    :root {
+      --primary-color: #2c2c94;
+      --background-color: #f2f6ff;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: var(--background-color);
+      color: #222;
+    }
+
+    /* Header */
+    .main-header {
+      background: linear-gradient(to right, #3730a3, #1e3a8a);
+      color: white;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      padding: 7px 20px;
+    }
+
+    .header-container {
+      max-width: 1200px;
+      height: 64px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 0 auto;
+    }
+
+    .logo-title {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo {
+      height: 40px;
+    }
+
+    .site-title {
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    .desktop-nav a {
+      margin-left: 20px;
+      text-decoration: none;
+      color: #e5e7eb;
+      font-weight: 700;
+    }
+
+    .desktop-nav a:hover {
+      color: white;
+    }
+
+    .mobile-nav-toggle {
+      display: none;
+    }
+
+    .mobile-menu {
+      display: none;
+      flex-direction: column;
+      background-color: #1e3a8a;
+      padding: 10px 20px;
+    }
+
+    .mobile-menu a {
+      color: #e5e7eb;
+      text-decoration: none;
+      padding: 8px 0;
+    }
+
+    .mobile-menu a:hover {
+      color: white;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    @media (max-width: 768px) {
+      .desktop-nav {
+        display: none;
+      }
+
+      .mobile-nav-toggle {
+        display: block;
+      }
+
+      .mobile-menu {
+        display: flex;
+      }
+    }
+
+    /* Page content styling */
+    .container {
+      max-width: 1200px;
+      margin: auto;
+      padding: 2rem 1rem;
+    }
+
+    .faculty-list,
+    .course-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1rem;
+      background-color: transparent;
+      padding: 0;
+      margin-bottom: 2rem;
+    }
+
+    .course,
+    .faculty-item {
+      background-color: #ffffff;
+      padding: 1rem;
+      border-radius: 8px;
+      box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      cursor: default;
+    }
+
+    .faculty-item:hover,
+    .course:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+      background-color: #f0f4ff;
+    }
+
+    .faculty-item h4,
+    .course h4 {
+      margin-bottom: 0.5rem;
+      color: var(--primary-color);
+    }
+
+    .faculty-item p,
+    .course p {
+      margin: 0;
+      font-size: 0.95rem;
+      color: #444;
+    }
+
+    /* Footer */
+    .footer {
+      background: linear-gradient(to right, #3730a3, #1e3a8a);
+      color: white;
+      padding: 40px 20px;
+      text-align: center;
+    }
+
+    .footer-content h3 {
+      font-size: 20px;
+      margin-bottom: 10px;
+    }
+
+    .footer-content p {
+      color: #d1d5db;
+      margin: 5px 0;
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      margin-top: 12px;
+    }
+
+    .footer-links a {
+      color: #d1d5db;
+      text-decoration: none;
+    }
+
+    .footer-links a:hover {
+      color: white;
+    }
+
+    .footer-note {
+      margin-top: 20px;
+      font-size: 12px;
+      color: #9ca3af;
+    }
+
+    @media (max-width: 768px) {
+      .section-title {
+        font-size: 1.5rem;
+      }
+
+      .faculty-list,
+      .course-list {
+        padding: 1rem;
+      }
+
+      .container {
+        padding: 1.5rem 1rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Header -->
+  <header class="main-header">
+    <div class="header-container">
+      <div class="logo-title">
+        <img src="images/logo.png" alt="Logo" class="logo">
+        <span class="site-title">Virtual Department Tour</span>
+      </div>
+      <nav class="desktop-nav">
+        <a href="index.html">Home</a>
+        <a href="faculty-courses.html">Faculty & Courses</a>
+        <a href="about.html">About</a>
+        <a href="map.html">Explore</a>
+        <a href="feedback.html">Feedback</a>
+      </nav>
+      <div class="mobile-nav-toggle">
+        <button id="menuToggle">&#9776;</button>
+      </div>
+    </div>
+    <div id="mobileMenu" class="mobile-menu hidden">
+      <a href="index.html">Home</a>
+      <a href="faculty-courses.html">Faculty & Courses</a>
+      <a href="about.html">About</a>
+      <a href="map.html">Explore</a>
+      <a href="feedback.html">Feedback</a>
+    </div>
+  </header>
+
+  <!-- Main content -->
+  <div class="container">
+    <section>
+      <h2 class="section-title">Computer Science Faculty</h2>
+      <div class="faculty-list">
+        <div class="faculty-item">
+          <h4>Dr. Hafiz Muhammad Faisal Shehzad</h4>
+          <p>Head of Computer Science Department</p>
+        </div>
+        <div class="faculty-item">
+          <h4>Dr. Muhammad Ilyas</h4>
+          <p>Dean of Computer Science Department</p>
+        </div>
+        <div class="faculty-item">
+          <h4>Dr Muhammad Saad Razzaq</h4>
+          <p>Professor</p>
+        </div>
+        <div class="faculty-item">
+          <h4>Muhammad Fahad</h4>
+          <p>Professor</p>
+        </div>
+        <div class="faculty-item">
+          <h4>Dr Fahad Maqbool</h4>
+          <p>Professor</p>
+        </div>
+        <div class="faculty-item">
+          <h4>Dr Hussam Ali</h4>
+          <p>Professor</p>
+        </div>
+        <div class="faculty-item">
+          <h4>Farooq Javed</h4>
+          <p>Professor</p>
+        </div>
+        <div class="faculty-item">
+          <h4>Nisar Ahmad</h4>
+          <p>Professor</p>
+        </div>
+        <div class="faculty-item">
+          <h4>Samreen Razzaq</h4>
+          <p>Professor</p>
+        </div>
+        <div class="faculty-item">
+          <h4>Aamir Zia</h4>
+          <p>Professor</p>
+        </div>
+        <div class="faculty-item">
+          <h4>Dr Hafiz Muhammad Hassan</h4>
+          <p>Professor</p>
+        </div>
+        <div class="faculty-item">
+          <h4>Sardar Asim Naseer</h4>
+          <p>Professor</p>
+        </div>
+        <div class="faculty-item">
+          <h4>Muddassar Ali Zaidi</h4>
+          <p>Professor</p>
+        </div>
+        <div class="faculty-item">
+          <h4>Hassan Umar</h4>
+          <p>Professor</p>
+        </div>
+        <div class="faculty-item">
+          <h4>Dr. Muhammad Kaleem</h4>
+          <p>Professor</p>
+        </div>
+      </div>
+
+      <h2 class="section-title">Computer Science Courses</h2>
+      <div class="course-list">
+        <div class="course">
+          <h4>Introduction to Programming</h4>
+        </div>
+        <div class="course">
+          <h4>Object Oriented Programming </h4>
+        </div>
+        <div class="course">
+          <h4>Operating Systems</h4>
+        </div>
+        <div class="course">
+          <h4>Artificial Intelligence</h4>
+        </div>
+        <div class="course">
+          <h4>Digital Logic Design</h4>
+        </div>
+        <div class="course">
+          <h4>Web System and Technologies</h4>
+        </div>
+        <div class="course">
+          <h4>Mobile Application Development </h4>
+        </div>
+        <div class="course">
+          <h4>Software Engineering</h4>
+        </div>
+        <div class="course">
+          <h4>Computer Architecture</h4>
+        </div>
+        <div class="course">
+          <h4>Information Security</h4>
+        </div>
+        <div class="course">
+          <h4>Computer Architecture and Assembly Language</h4>
+        </div>
+        <div class="course">
+          <h4>Capstone Project</h4>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2 class="section-title">Information Technology Faculty</h2>
+      <div class="faculty-list">
+        <div class="faculty-item">
+          <h4>Dr Hikmat Ullah Khan</h4>
+          <p>Head of IT Department </p>
+        </div>
+        <div class="faculty-item">
+          <h4>Waseem Ahmad</h4>
+          <p>Professor</p>
+        </div>
+        <div class="faculty-item">
+          <h4>Dr. Humaira Ijaz</h4>
+          <p>Professor</p>
+        </div>
+        <div class="faculty-item">
+          <h4>Dr. Khalid Mahmood Aamir</h4>
+          <p>Professor</p>
+        </div>
+        <div class="faculty-item">
+          <h4>Nisar Ahmad</h4>
+          <p>Professor</p>
+        </div>
+        <div class="faculty-item">
+          <h4>Dr. Bushra Jamil</h4>
+          <p>Professor</p>
+        </div>
+        <div class="faculty-item">
+          <h4>Azhar Mushtaq</h4>
+          <p>Professor</p>
+        </div>
+        <div class="faculty-item">
+          <h4>Dr Hafiz Muhammad Hassan</h4>
+          <p>Professor</p>
+        </div>
+        <div class="faculty-item">
+          <h4>Shafaan Khaliq Bhatti</h4>
+          <p>Professor</p>
+        </div>
+        <div class="faculty-item">
+          <h4>Dr. Muhammad Kaleem</h4>
+          <p>Professor</p>
+        </div>
+        <div class="faculty-item">
+          <h4>Dr. Zafar Iqbal</h4>
+          <p>Professor</p>
+        </div>
+        <div class="faculty-item">
+          <h4>Dr. Azhar Hussain</h4>
+          <p>Professor</p>
+        </div>
+      </div>
+
+      <h2 class="section-title">Information Technology Courses</h2>
+      <div class="course-list">
+        <div class="course">
+          <h4>Database Administration & Management</h4>
+        </div>
+        <div class="course">
+          <h4>Enterprise Resource Planning Systems</h4>
+        </div>
+        <div class="course">
+          <h4>Cloud Computing </h4>
+        </div>
+        <div class="course">
+          <h4>System Integration and Architecture</h4>
+        </div>
+        <div class="course">
+          <h4>IT Infrastructure</h4>
+        </div>
+        <div class="course">
+          <h4>System & Network Administration</h4>
+        </div>
+        <div class="course">
+          <h4>Internet Architecture and Protocol</h4>
+        </div>
+        <div class="course">
+          <h4>Multimedia System & Design</h4>
+        </div>
+        <div class="course">
+          <h4>Object Oriented Programming</h4>
+        </div>
+        <div class="course">
+          <h4>System Integration and Architecture</h4>
+        </div>
+        <div class="course">
+          <h4>System Integration and Architecture</h4>
+        </div>
+        <div class="course">
+          <h4>Capstone Project</h4>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!--Footer-->
+  <footer id="contact" class="footer">
+    <div class="footer-content">
+      <h3>Department of Computer Science - Virtual Department Tour</h3>
+      <p>Final Year Project | BS Computer Science (Batch 2021 - 2025)</p>
+      <p>Developed by Amina Qamar, Rayan Pervaiz and Saman Fatima</p>
+      <p>Supervised by Prof. Muhammad Fahad</p>
+      <p>University of Sargodha</p>
+
+      <div class="footer-links">
+        <p>Contact: +92-308-9507879</p>
+        <p>Email: <a href="mailto:aminamalik2356@gmail.com">aminamalik2356@gmail.com</a></p>
+      </div>
+
+      <div class="footer-note">
+        &copy; 2025 Virtual Tour Project. All rights reserved.
+      </div>
+    </div>
+  </footer>
+
+  <!-- Toggle Menu Script -->
+  <script>
+    const menuToggle = document.getElementById("menuToggle");
+    const mobileMenu = document.getElementById("mobileMenu");
+
+    menuToggle.addEventListener("click", () => {
+      mobileMenu.classList.toggle("hidden");
+    });
+  </script>
+
+</body>
+
+</html>

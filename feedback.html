@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Virtual Department Tour</title>
+    <link rel="shortcut icon" href="images/favicon.png" type="image/x-icon">
+    <style>
+        /*Base Styles*/
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #f0f4ff;
+            color: #222;
+            line-height: 1.6;
+        }
+
+        /* Header */
+        .main-header {
+            background: linear-gradient(to right, #3730a3, #1e3a8a);
+            color: white;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            padding: 7px 20px;
+        }
+
+        .header-container {
+            max-width: 1200px;
+            height: 64px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 0 auto;
+        }
+
+        .logo-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo {
+            height: 40px;
+        }
+
+        .site-title {
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .desktop-nav a {
+            margin-left: 20px;
+            text-decoration: none;
+            color: #e5e7eb;
+            font-weight: 700;
+        }
+
+        .desktop-nav a:hover {
+            color: white;
+        }
+
+        .mobile-nav-toggle {
+            display: none;
+        }
+
+        .mobile-menu {
+            display: none;
+            flex-direction: column;
+            background-color: #1e3a8a;
+            padding: 10px 20px;
+        }
+
+        .mobile-menu a {
+            color: #e5e7eb;
+            text-decoration: none;
+            padding: 8px 0;
+        }
+
+        .mobile-menu a:hover {
+            color: white;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        @media (max-width: 768px) {
+            .desktop-nav {
+                display: none;
+            }
+
+            .mobile-nav-toggle {
+                display: block;
+            }
+
+            .mobile-menu {
+                display: flex;
+            }
+        }
+
+        /* Feedback Form */
+        .feedback-container {
+            max-width: 600px;
+            margin: 3rem auto;
+            background: #fff;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .feedback-container h2 {
+            margin-bottom: 1rem;
+            color: #1e3a8a;
+        }
+
+        .feedback-container label {
+            display: block;
+            margin-top: 1rem;
+            font-weight: 500;
+        }
+
+        .feedback-container input,
+        .feedback-container textarea {
+            width: 100%;
+            padding: 0.75rem;
+            margin-top: 0.5rem;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 1rem;
+        }
+
+        .feedback-container button {
+            margin-top: 1.5rem;
+            background-color: #3730a3;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 25px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .feedback-container button:hover {
+            background-color: #1e3a8a;
+        }
+
+        /* Footer */
+        .footer {
+            background: linear-gradient(to right, #3730a3, #1e3a8a);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        .footer-content h3 {
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+
+        .footer-content p {
+            color: #d1d5db;
+            margin: 5px 0;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            margin-top: 12px;
+        }
+
+        .footer-links a {
+            color: #d1d5db;
+            text-decoration: none;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .footer-note {
+            margin-top: 20px;
+            font-size: 12px;
+            color: #9ca3af;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!--Header-->
+    <header class="main-header">
+        <div class="header-container">
+            <div class="logo-title">
+                <img src="images/logo.png" alt="Logo" class="logo">
+                <span class="site-title">Virtual Department Tour</span>
+            </div>
+            <nav class="desktop-nav">
+                <a href="index.html">Home</a>
+                <a href="faculty-courses.html">Faculty & Courses</a>
+                <a href="about.html">About</a>
+                <a href="map.html">Explore</a>
+                <a href="feedback.html">Feedback</a>
+            </nav>
+            <div class="mobile-nav-toggle">
+                <button id="menuToggle">&#9776;</button>
+            </div>
+        </div>
+        <div id="mobileMenu" class="mobile-menu hidden">
+            <a href="index.html">Home</a>
+            <a href="faculty-courses.html">Faculty & Courses</a>
+            <a href="about.html">About</a>
+            <a href="map.html">Explore</a>
+            <a href="feedback.html">Feedback</a>
+        </div>
+    </header>
+
+    <!--Feedback Form-->
+    <div class="feedback-container">
+        <h2>We'd Love Your Feedback</h2>
+        <form action="https://formsubmit.co/aminamalik2356@gmail.com" method="post">
+
+            <input type="hidden" name="_captcha" value="false">
+            <input type="hidden" name="_subject" value="New Feedback!">
+            <input type="hidden" name="_redirect" value="http://localhost:5500/thankyou.html">
+
+            <label for="name">Your Name:</label>
+            <input type="text" id="name" name="name" required>
+
+            <label for="email">Your Email:</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="message">Your Feedback:</label>
+            <textarea id="message" name="message" rows="6" required></textarea>
+
+            <button type="submit">Submit Feedback</button>
+        </form>
+    </div>
+
+    <!--Footer-->
+    <footer id="contact" class="footer">
+        <div class="footer-content">
+            <h3>Department of Computer Science - Virtual Department Tour</h3>
+            <p>Final Year Project | BS Computer Science (Batch 2021 - 2025)</p>
+            <p>Developed by Amina Qamar, Rayan Pervaiz and Saman Fatima</p>
+            <p>Supervised by Prof. Muhammad Fahad</p>
+            <p>University of Sargodha</p>
+
+            <div class="footer-links">
+                <p>Contact: +92-308-9507879</p>
+                <p>Email: <a href="mailto:aminamalik2356@gmail.com">aminamalik2356@gmail.com</a></p>
+            </div>
+
+            <div class="footer-note">
+                &copy; 2025 Virtual Tour Project. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <!--Menu Toogle Script-->
+    <script>
+        const menuToggle = document.getElementById("menuToggle");
+        const mobileMenu = document.getElementById("mobileMenu");
+
+        menuToggle.addEventListener("click", () => {
+            mobileMenu.classList.toggle("hidden");
+        });
+    </script>
+
+</body>
+
+</html>

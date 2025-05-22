@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Virtual Department Tour</title>
+  <link rel="shortcut icon" href="images/favicon.png" type="image/x-icon">
+  <style>
+    /* Base Styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f0f4ff;
+      color: #222;
+      line-height: 1.6;
+    }
+
+    /* Header */
+    .main-header {
+      background: linear-gradient(to right, #3730a3, #1e3a8a);
+      color: white;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      padding: 7px 20px;
+    }
+
+    .header-container {
+      max-width: 1200px;
+      height: 64px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 0 auto;
+    }
+
+    .logo-title {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo {
+      height: 40px;
+    }
+
+    .site-title {
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    .desktop-nav a {
+      margin-left: 20px;
+      text-decoration: none;
+      color: #e5e7eb;
+      font-weight: 700;
+    }
+
+    .desktop-nav a:hover {
+      color: white;
+    }
+
+    .mobile-nav-toggle {
+      display: none;
+    }
+
+    .mobile-menu {
+      display: none;
+      flex-direction: column;
+      background-color: #1e3a8a;
+      padding: 10px 20px;
+    }
+
+    .mobile-menu a {
+      color: #e5e7eb;
+      text-decoration: none;
+      padding: 8px 0;
+    }
+
+    .mobile-menu a:hover {
+      color: white;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    @media (max-width: 768px) {
+      .desktop-nav {
+        display: none;
+      }
+
+      .mobile-nav-toggle {
+        display: block;
+      }
+
+      .mobile-menu {
+        display: flex;
+      }
+    }
+
+    /* Tour Section */
+    .hero {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      padding: 6rem 5%;
+      gap: 2rem;
+    }
+
+    .hero-text {
+      flex: 1;
+      max-width: 600px;
+    }
+
+    .hero-text h2 {
+      font-size: 2rem;
+      color: #2a2f91;
+      margin-bottom: 1rem;
+    }
+
+    .hero-text p {
+      font-size: 1.1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .btn {
+      display: inline-block;
+      background: linear-gradient(to right, #4f46e5, #6366f1);
+      color: white;
+      padding: 0.75rem 1.5rem;
+      border-radius: 25px;
+      text-decoration: none;
+      font-weight: bold;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      transition: background 0.3s ease;
+    }
+
+    .btn:hover {
+      background: linear-gradient(to right, #3730a3, #4f46e5);
+    }
+
+    .hero-image {
+      flex: 1;
+      text-align: center;
+    }
+
+    .hero-image img {
+      width: 100%;
+      max-width: 600px;
+      border-radius: 10px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Intro Section */
+    .intro {
+      padding: 2rem 5%;
+    }
+
+    .intro h2 {
+      color: #2a2f91;
+      margin-bottom: 1rem;
+    }
+
+    .features {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .feature-box {
+      flex: 1 1 45%;
+      background: #fff;
+      border: 1px solid #ddd;
+      padding: 1rem;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    }
+
+    /* Media Section */
+    .media {
+      padding: 2rem 5%;
+    }
+
+    .media h2 {
+      margin: 2rem 0 1rem;
+      color: #2a2f91;
+      text-align: center;
+    }
+
+    .media video {
+      border-radius: 10px;
+      display: block;
+      margin: 2rem auto;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .gallery {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .gallery img {
+      width: 30%;
+      border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Footer */
+    .footer {
+      background: linear-gradient(to right, #3730a3, #1e3a8a);
+      color: white;
+      padding: 40px 20px;
+      text-align: center;
+    }
+
+    .footer-content h3 {
+      font-size: 20px;
+      margin-bottom: 10px;
+    }
+
+    .footer-content p {
+      color: #d1d5db;
+      margin: 5px 0;
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      margin-top: 12px;
+    }
+
+    .footer-links a {
+      color: #d1d5db;
+      text-decoration: none;
+    }
+
+    .footer-links a:hover {
+      color: white;
+    }
+
+    .footer-note {
+      margin-top: 20px;
+      font-size: 12px;
+      color: #9ca3af;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Header -->
+  <header class="main-header">
+    <div class="header-container">
+      <div class="logo-title">
+        <img src="images/logo.png" alt="Logo" class="logo">
+        <span class="site-title">Virtual Department Tour</span>
+      </div>
+      <nav class="desktop-nav">
+        <a href="index.html">Home</a>
+        <a href="faculty-courses.html">Faculty & Courses</a>
+        <a href="about.html">About</a>
+        <a href="map.html">Explore</a>
+        <a href="feedback.html">Feedback</a>
+      </nav>
+      <div class="mobile-nav-toggle">
+        <button id="menuToggle">&#9776;</button>
+      </div>
+    </div>
+    <div id="mobileMenu" class="mobile-menu hidden">
+      <a href="index.html">Home</a>
+      <a href="faculty-courses.html">Faculty & Courses</a>
+      <a href="about.html">About</a>
+      <a href="map.html">Explore</a>
+      <a href="feedback.html">Feedback</a>
+    </div>
+  </header>
+
+  <!-- Tour Section -->
+  <section class="hero">
+    <div class="hero-text">
+      <h2>Welcome to Muhammad Ali Block</h2>
+      <p style="text-align: justify;">
+        We’re excited to welcome you to our official virtual tour—a digital gateway into the heart of our Computer
+        Science and Information Technology Department. Whether you're a prospective student, a proud parent, an alumnus,
+        or simply curious about what we
+        offer, this interactive experience is designed to give you a real sense of life inside our department.<br>
+        Welcome—and enjoy your virtual visit!
+      </p>
+      <a href="https://aminamalik21.github.io/Deoartment-tour/" class="btn">Start Tour</a>
+    </div>
+    <div class="hero-image">
+      <img src="images/dep.jpeg" alt="Muhammad Ali Block" />
+    </div>
+  </section>
+
+  <!-- Introduction Section -->
+  <section class="intro" id="intro">
+    <h2>Explore the key features that are designed to enhance your experience</h2>
+    <p>
+      This tour isn’t just about spaces—it’s about experiences. Our goal is to showcase the dynamic learning
+      environment, supportive faculty, and innovative resources that shape student success. So feel free to look around,
+      click, read, and discover what makes our department a thriving hub of technology and talent.
+    </p>
+
+    <div class="features">
+      <div class="feature-box">
+        <h3>📍 Hotspots – Explore with a Click</h3>
+        <p>Hotspots are clickable markers that guide you through the tour. Tap or click them to move between rooms and
+          navigate through different sections of the department smoothly.</p>
+      </div>
+      <div class="feature-box">
+        <h3>ℹ️ Information Points – Learn as You Go</h3>
+        <p>These provide helpful descriptions and insights about labs, equipment, rooms, or faculty. They're placed
+          where you might have questions—offering quick, clear info as you explore.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Media Section -->
+  <section class="media" id="media">
+    <h2>🎥 Tour Preview Video</h2>
+    <video controls width="70%">
+      <source src="images/demo.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+
+    <h2>📸 Image Gallery</h2>
+    <div class="gallery">
+      <img src="images/front.jpeg" alt="entrance">
+      <img src="images/lab.jpeg" alt="smartlab">
+      <img src="images/hallway.jpeg" alt="hallway">
+      <img src="images/class.jpeg" alt="class">
+      <img src="images/lab-hall.jpeg" alt="lab-hall">
+      <img src="images/lab102.jpeg" alt="lab102">
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer id="contact" class="footer">
+    <div class="footer-content">
+      <h3>Department of Computer Science - Virtual Department Tour</h3>
+      <p>Final Year Project | BS Computer Science (Batch 2021 - 2025)</p>
+      <p>Developed by Amina Qamar, Rayan Pervaiz and Saman Fatima</p>
+      <p>Supervised by Prof. Muhammad Fahad</p>
+      <p>University of Sargodha</p>
+
+      <div class="footer-links">
+        <p>Contact: +92-308-9507879</p>
+        <p>Email: <a href="mailto:aminamalik2356@gmail.com">aminamalik2356@gmail.com</a></p>
+      </div>
+
+      <div class="footer-note">
+        &copy; 2025 Virtual Tour Project. All rights reserved.
+      </div>
+    </div>
+  </footer>
+
+  <!-- Toggle Menu Script -->
+  <script>
+    const menuToggle = document.getElementById('menuToggle');
+    const mobileMenu = document.getElementById('mobileMenu');
+
+    menuToggle.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+    });
+  </script>
+</body>
+
+</html>
