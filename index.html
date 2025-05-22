@@ -159,6 +159,32 @@
       box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
     }
 
+    @media (max-width: 768px) {
+      .hero {
+        flex-direction: column;
+        align-items: flex-start;
+        text-align: left;
+        padding: 2rem 5%;
+      }
+
+      .hero-text,
+      .hero-image {
+        flex: none;
+        width: 100%;
+      }
+
+      .hero-text h2,
+      .hero-text p {
+        text-align: left;
+      }
+
+      .btn {
+        display: block;
+        margin-top: 1rem;
+      }
+    }
+
+
     /* Intro Section */
     .intro {
       padding: 2rem 5%;
